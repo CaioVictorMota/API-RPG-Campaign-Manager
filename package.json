@@ -1,0 +1,26 @@
+{
+  "name": "api-rpg-campaign-manager",
+  "version": "1.0.0",
+  "description": "An API build as portfolio. A CRUD for RPG Campaigns and Sessions",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaioVictorMota/API-RPG-Campaign-Manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaioVictorMota/API-RPG-Campaign-Manager/issues"
+  },
+  "homepage": "https://github.com/CaioVictorMota/API-RPG-Campaign-Manager#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.13"
+  }
+}
