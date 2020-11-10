@@ -1,4 +1,4 @@
-require('dotenv').config()
+//require('dotenv').config()
 const mongoose = require('mongoose')
 
 const DB_HOST = process.env.DB_HOST
@@ -11,5 +11,5 @@ mongoose.connect(connectionUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: true
+    useFindAndModify: false
 })

@@ -1,6 +1,6 @@
 require('dotenv').config()
+require('./db/mongoose.js')
 const express = require('express')
-const mongoose = require('./db/mongoose.js')
 const campaignRouter = require('./controllers/campaign.js')
 const sessionRouter = require('./controllers/session.js')
 
@@ -8,7 +8,7 @@ const app = express()
 const SERVER_PORT = process.env.SERVER_PORT || 3000
 
 app.use(express.json())
-app.use(campaignRouter)
+app.use(campaignRouter.endPoint, campaignRouter.router)
 //app.use(sessionRouter)
 
 app.listen(SERVER_PORT, () => {
