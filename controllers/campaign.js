@@ -2,7 +2,7 @@ const express = require('express')
 const Campaign = require('../models/campaign.js')
 
 const router = new express.Router()
-const endPoint = '/campaign'
+const endPoint = '/campaigns'
 
 //Routes for /campaign/
 router.route('/')
@@ -20,10 +20,10 @@ router.route('/')
 .get(async (req, res) => {
     try{
         const campaigns = await Campaign.find({})
-        if (campaigns.length === 0) {
-            return res.status(204).send(campaigns)
+        if (campaigns.length !== 0) {
+            return res.status(200).send(campaigns)
         }
-        res.status(200).send(campaigns)
+        res.status(204).send(campaigns)
     } catch (error) {
         res.status(500).send(error)
     }
@@ -37,7 +37,7 @@ router.route('/:id')
         if (campaign) {
             return res.status(200).send(campaign)
         }
-        res.status(404).send()
+        res.status(204).send()
     } catch (error) {
         res.status(500).send(error)
     }
@@ -62,9 +62,9 @@ router.route('/:id')
         if (updatedCampaign) {
             return res.status(200).send()
         }
-        res.status(400).send(error)
+        res.status(404).send(error)
     } catch (error) {
-        res.status(400).send(error)
+        res.status(500).send(error)
     }
 })
 .patch(async (req, res) => {
@@ -76,9 +76,9 @@ router.route('/:id')
         if (updatedCampaign) {
             return res.status(200).send()
         }
-        res.status(400).send(error)
+        res.status(404).send(error)
     } catch (error) {
-        res.status(400).send(error)
+        res.status(500).send(error)
     }
 })
 .delete(async (req, res) => {
@@ -86,7 +86,7 @@ router.route('/:id')
         await Campaign.findByIdAndDelete(req.params.id)
         return res.status(200).send()
     } catch (error) {
-        res.status(404).send()
+        res.status(500).send()
     }
 })
 
