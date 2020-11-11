@@ -8,8 +8,8 @@ const app = express()
 const SERVER_PORT = process.env.SERVER_PORT || 3000
 
 app.use(express.json())
-app.use(campaignRouter.endPoint, campaignRouter.router)
-//app.use(sessionRouter)
+app.use(campaignRouter.router)
+app.use(sessionRouter.router)
 
 app.listen(SERVER_PORT, () => {
     console.log(`Server running on port ${SERVER_PORT}`);
