@@ -16,18 +16,16 @@ router.use(endPoint, checkCampaignExistence)
 router.route(endPoint)
 .post(isCampaignActive, async (req, res) => {
     try{
-        let campaign = await Campaign.findById(
-            req.params[campaignRouter.idParam])
-
+        const campaign = await Campaign.findById(
+                req.params[campaignRouter.idParam])
         const newSession = new Session(req.body)
         campaign.sessions.push(newSession)
 
-        campaign = await Campaign.findByIdAndUpdate(
-            req.params[campaignRouter.idParam], campaign)
+        await Campaign.findByIdAndUpdate(
+                req.params[campaignRouter.idParam], campaign)
 
         const location = (endPoint + newSession._id).replace(
-            ':'+campaignRouter.idParam, req.params[campaignRouter.idParam])
-
+                ':'+campaignRouter.idParam, req.params[campaignRouter.idParam])
         res.status(201)
             .location(location)
             .send()
@@ -38,7 +36,7 @@ router.route(endPoint)
 .get(async (req, res) => {
     try {
         const campaign = await Campaign.findById(
-            req.params[campaignRouter.idParam])
+                req.params[campaignRouter.idParam])
 
         if (campaign.sessions.length !== 0) {
             return res.status(200).send(campaign.sessions)
@@ -54,10 +52,10 @@ router.route(endPoint + ':' + idParam)
 .get(async (req, res) => {
     try {
         const campaign = await Campaign.findById(
-            req.params[campaignRouter.idParam])
+                req.params[campaignRouter.idParam])
     
         const session = campaign.sessions.find(
-            session => session._id == req.params[idParam])
+                session => session._id == req.params[idParam])
 
         if (session) {
             return res.status(200).send(session)
@@ -67,18 +65,29 @@ router.route(endPoint + ':' + idParam)
         res.status(500).send(error)
     }
 })
-.put(async (req, res) => {
-    res.send('PUT One OK. CID: ' + req.params[campaignRouter.idParam] 
-    + '; SID: ' + req.params[idParam])
-})
-.patch(async (req, res) => {
-    res.send('PATCH One OK. CID: ' + req.params[campaignRouter.idParam] 
-    + '; SID: ' + req.params[idParam])
-})
 .delete(async (req, res) => {
-    res.send('DELETE One OK. CID: ' + req.params[campaignRouter.idParam] 
-    + '; SID: ' + req.params[idParam])
-})
+    try {
+        const campaign = await Campaign.findById(
+                req.params[campaignRouter.idParam])
+    
+        const session = campaign.sessions.find(
+                session => session._id == req.params[idParam])
 
+        if (session) {
+            const sessionIndex = campaign.sessions.findIndex(
+                    session => session._id == req.params[idParam])
+
+            campaign.sessions.splice(sessionIndex, 1)
+
+            await Campaign.findByIdAndUpdate(
+                    req.params[campaignRouter.idParam], campaign)
+
+            return res.status(200).send()
+        }
+        res.status(204).send()
+    } catch (error) {
+        res.status(500).send()
+    }
+})
 
 module.exports = {endPoint, router}
