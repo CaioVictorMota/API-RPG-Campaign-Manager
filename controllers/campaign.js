@@ -24,7 +24,7 @@ router.route(endPoint)
         if (campaigns.length !== 0) {
             return res.status(200).send(campaigns)
         }
-        res.status(204).send(campaigns)
+        res.status(204).send()
     } catch (error) {
         res.status(500).send(error)
     }
