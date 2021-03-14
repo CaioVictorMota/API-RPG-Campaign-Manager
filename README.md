@@ -1,4 +1,4 @@
-<h1> API-RPG-Campaign-Manager </h1>
+<h1> ttrpg-campaign-manager </h1>
 
 This is a simple work-in-progress CRUD API for Tabletop RPG's Campaigns and Sessions. It is possible to record a Campaign basic information and record dates of sessions for easy tracking.
 
