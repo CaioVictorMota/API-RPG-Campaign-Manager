@@ -45,6 +45,6 @@ For POST method, some properties are required:
 
 <h2>Credits</h2>
 
-This Project was built by [Caio "Tyghorn" Victor](https://github.com/CaioVictorMota).
+This Project was built by [Caio "Tyghorn" Victor](https://github.com/CaioVSMSantos).
 
 We are all one.
